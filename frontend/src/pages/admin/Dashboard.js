@@ -163,31 +163,6 @@ const AdminDashboard = () => {
             </Link>
           ))}
         </div>
-
-        {/* Recent Activity */}
-        <div className="mt-8 bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">System Overview</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-gray-50 rounded-lg p-4">
-              <h3 className="font-medium text-gray-900 mb-2">Today's Summary</h3>
-              <p className="text-sm text-gray-600">
-                {stats.todayAppointments} appointments scheduled for today
-              </p>
-              <p className="text-sm text-gray-600 mt-1">
-                {stats.totalDoctors} active doctors in the system
-              </p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-4">
-              <h3 className="font-medium text-gray-900 mb-2">Monthly Performance</h3>
-              <p className="text-sm text-gray-600">
-                {stats.monthlyAppointments} appointments this month
-              </p>
-              <p className="text-sm text-gray-600 mt-1">
-                Average of {Math.round(stats.monthlyAppointments / 30)} appointments per day
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </>
   );
