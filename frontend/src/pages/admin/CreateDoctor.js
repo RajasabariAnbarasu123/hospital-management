@@ -198,16 +198,6 @@ const CreateDoctor = () => {
             </div>
           </form>
         </div>
-
-        {/* Tips Box */}
-        <div className="mt-6 bg-blue-50 rounded-lg p-4">
-          <h3 className="font-semibold text-blue-800 mb-2">Tips:</h3>
-          <ul className="text-sm text-blue-700 space-y-1">
-            <li>• Use a strong password for doctor accounts</li>
-            <li>• Verify the email address is correct - doctors will use it to login</li>
-            <li>• Specialization helps patients find the right doctor</li>
-          </ul>
-        </div>
       </div>
     </>
   );
