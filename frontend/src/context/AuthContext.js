@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
 
   // Configure axios defaults
-  axios.defaults.baseURL = 'http://localhost:8080/api';
+  axios.defaults.baseURL = 'https://hospital-management-44bk.onrender.com/api';
   
   // Add token to all requests if it exists
   axios.interceptors.request.use(
