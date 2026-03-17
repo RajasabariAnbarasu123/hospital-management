@@ -1,33 +1,31 @@
-# # Build stage
-# FROM maven:3.9.12-eclipse-temurin-17 as builder
-# WORKDIR /app
-# COPY . .
-# RUN mvn clean package -DskipTests
-
-# # Runtime stage
-# FROM eclipse-temurin:17-jre-alpine
-# WORKDIR /app
-# COPY --from=builder /app/target/appointment-system-1.0.0.jar app.jar
-
-# EXPOSE 8080
-
-# ENV JAVA_OPTS="-Xmx512m -Xms256m"
-
-# ENTRYPOINT exec java $JAVA_OPTS -jar app.jar
-
-
-
-
-
+# -------- Build stage --------
 FROM maven:3.9.9-eclipse-temurin-17 AS build
 WORKDIR /app
-COPY . .
+
+# Copy only necessary files first (better caching)
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+COPY src ./src
+
 RUN mvn clean package -DskipTests
 
-# Run stage
-FROM eclipse-temurin:17-jdk
+# -------- Run stage --------
+FROM eclipse-temurin:17-jre
+
 WORKDIR /app
+
+# Create non-root user
+RUN addgroup --system appgroup && adduser --system appuser --ingroup appgroup
+
+# Copy jar
 COPY --from=build /app/target/*.jar app.jar
+
+# Change ownership
+RUN chown appuser:appgroup app.jar
+
+# Switch to non-root user
+USER appuser
 
 EXPOSE 8080
 
